@@ -18,26 +18,18 @@ st.title("📊 WORKBank: Dashboard Phân Tích Tương Lai Việc Làm & AI")
 st.markdown("Phân tích thái độ và mức độ sẵn sàng sử dụng AI (LLM) của người lao động Hoa Kỳ.")
 
 # --- TẢI VÀ XỬ LÝ DỮ LIỆU ---
-# 2. Thành phần tải file (File Uploader) - Đổi định dạng nhận diện thành .csv
-uploaded_file = st.file_uploader("Chọn một file CSV (.csv)", type=["csv"])
-
-if uploaded_file is not None:
-    try:
-        # 3. Đọc dữ liệu từ file CSV bằng Pandas
-        # Dùng mã hóa utf-8 hoặc latin1 để tránh lỗi font tiếng Việt nếu có
-        try:
-            df = pd.read_csv(uploaded_file, encoding='utf-8')
-        except UnicodeDecodeError:
-            df = pd.read_csv(uploaded_file, encoding='latin-1')
-
-        st.success("Tải file CSV thành công!")
-
+#@st.cache_data
+def load_data():
+    # Sử dụng đường dẫn tương đối, giả định file nằm cùng thư mục với script
+    df = pd.read_csv('domain_worker_metadata.csv')
+    
     # Xử lý các cột LLM Usage bị thiếu (NaN) thành 'Never'
     usage_cols = [col for col in df.columns if 'LLM Usage by Type' in col]
     df[usage_cols] = df[usage_cols].fillna('Never')
-
+    
     return df
 
+# Tải dữ liệu
 df = load_data()
 
 # --- SIDEBAR: BỘ LỌC DỮ LIỆU ---
