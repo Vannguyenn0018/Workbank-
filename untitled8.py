@@ -17,6 +17,50 @@ st.set_page_config(page_title="WORKBank Dashboard", page_icon="📊", layout="wi
 st.title("📊 WORKBank: Dashboard Phân Tích Tương Lai Việc Làm & AI")
 st.markdown("Phân tích thái độ và mức độ sẵn sàng sử dụng AI (LLM) của người lao động Hoa Kỳ.")
 
+# ==========================================
+# ĐỊNH DẠNG TABS NỔI 3D
+# ==========================================
+st.markdown("""
+<style>
+    /* Chỉnh khoảng cách giữa các tabs */
+    div[data-baseweb="tab-list"] {
+        gap: 8px;
+    }
+
+    /* Trạng thái mặc định của các Tab (chưa chọn) */
+    div[data-baseweb="tab-list"] button[role="tab"] {
+        background-color: #E2E8F0; /* Màu nền xám nhạt như hình */
+        border-radius: 6px 6px 0px 0px; /* Bo góc phía trên */
+        padding: 10px 24px;
+        border: none;
+        color: #64748B; /* Màu chữ xám xanh */
+        font-weight: 600;
+        transition: all 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+    }
+
+    /* Xóa viền focus mặc định xấu xí của Streamlit */
+    div[data-baseweb="tab-list"] button[role="tab"]:focus {
+        outline: none;
+    }
+
+    /* Trạng thái Tab ĐƯỢC CHỌN (Active) */
+    div[data-baseweb="tab-list"] button[role="tab"][aria-selected="true"] {
+        background-color: #FFFFFF !important; /* Đổi sang nền trắng */
+        color: #1E3A8A !important; /* Đổi màu chữ đậm hơn */
+        /* Tạo viền đỏ/xanh ở dưới đáy giống thiết kế của cậu */
+        box-shadow: inset 0px -3px 0px 0px #EF4444; 
+        border-bottom: 2px solid #2563EB; 
+    }
+
+    /* Chỉnh lại font chữ và căn giữa cho nội dung tab */
+    div[data-baseweb="tab-list"] button[role="tab"] p {
+        font-size: 15px;
+        margin: 0;
+        text-align: center;
+    }
+</style>
+""", unsafe_allow_html=True)
+
 # --- TẢI VÀ XỬ LÝ DỮ LIỆU ---
 #@st.cache_data
 def load_data():
